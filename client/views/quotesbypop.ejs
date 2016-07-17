@@ -1,0 +1,30 @@
+<html>
+<style>
+.namepart{
+  position: relative;
+  left:300px;
+}
+form{
+  display: inline-block;
+}
+.like{
+  display: inline-block;
+}
+</style>
+<h2>Here are awesome quotes!</h2>
+<form action="/quotes">
+  <input type="submit" value="sort by time">
+</form>
+<% for (var x in quotes) { %>
+  <p>"<%= quotes[x].quote %>"</p>
+  <p><%= quotes[x].like %> likes</p>
+  <form class="like" action="/likes/<%= quotes[x]._id %>" method="post">
+  <input type="hidden" name="sort" value="popularity">
+  <input type="hidden" name="like" value="<%= quotes[x].like %>">
+  <input type="submit" value="&#9650">
+  </form>
+  <p class="namepart">--<%= quotes[x].name %> at <%= quotes[x].createdAt %></p>
+  <hr>
+<% } %>
+<a href="/">go back</a>
+</html>
